@@ -48,15 +48,15 @@ export default function Page() {
             {isFetching && (
                 <motion.div
                     key={"loading"}
-                    initial={{opacity: 0, y:-150}}
-                    animate={{opacity: 0.5, y:0}}
+                    initial={{opacity: 0, y: -150}}
+                    animate={{opacity: 0.5, y: 0}}
                     exit={{opacity: 0}}
                     transition={{duration: 1, ease: [0, 0.5, 0, 1]}}
                 >
                     <CircleContainer>
                         <Container maxWidth={"xl"}>
                             <Box py={7} px={2}>
-                                <LinearProgress />
+                                <LinearProgress/>
                             </Box>
                         </Container>
                     </CircleContainer>
@@ -64,35 +64,35 @@ export default function Page() {
             )}
             {!isFetching &&
                 (
-                <ImagesContext.Provider
-                    value={{
-                        data: images,
-                        refresh: () => {
-                        }
-                    }}
-                >
-                    <LocationsContext.Provider
+                    <ImagesContext.Provider
                         value={{
-                            data: locations,
+                            data: images,
                             refresh: () => {
                             }
                         }}
                     >
-                        <TeamsContext.Provider
+                        <LocationsContext.Provider
                             value={{
-                                data: teams,
+                                data: locations,
                                 refresh: () => {
                                 }
                             }}
                         >
-                            <UsersContext.Provider
+                            <TeamsContext.Provider
                                 value={{
-                                    data: users,
+                                    data: teams,
                                     refresh: () => {
-
                                     }
                                 }}
                             >
+                                <UsersContext.Provider
+                                    value={{
+                                        data: users,
+                                        refresh: () => {
+
+                                        }
+                                    }}
+                                >
                                     <Box
                                         component={"main"}
                                         minHeight={"96vh"}
@@ -102,132 +102,102 @@ export default function Page() {
                                             pb: 9
                                         }}
                                     >
-                                            <CircleContainer>
-                                                {mySport && myTeam &&
-                                                    <Box>
-                                                        <Overview
-                                                            mySport={mySport}
-                                                            myTeam={myTeam}
-                                                            myTeamUsers={myTeamUsers}
-                                                            myTeamRank={myTeamRank}
-                                                        />
-                                                    </Box>
-                                                }
-                                                {!mySport && !myTeam &&
-                                                    <Container
-                                                        maxWidth={"xl"}
-                                                    >
-                                                        <OtherInfo infoName={""}
-                                                                   infoContent={"どの競技にも参加していません。"}
-                                                                   infoSubContent={"競技に参加しない方でも、各競技の進行状況を見ることができます。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
-                                                    </Container>
-                                                }
-                                            </CircleContainer>
-
-                                            <Container
-                                                maxWidth={"xl"}
-                                                disableGutters
-                                                sx={{px: 1, py: 3, mt: "-100px"}}
-                                            >
-                                                <Stack
-                                                    direction={"column"}
-                                                    justifyContent={"space-between"}
-                                                    spacing={3}
+                                        <CircleContainer>
+                                            {mySport && myTeam &&
+                                                <Box>
+                                                    <Overview
+                                                        mySport={mySport}
+                                                        myTeam={myTeam}
+                                                        myTeamUsers={myTeamUsers}
+                                                        myTeamRank={myTeamRank}
+                                                    />
+                                                </Box>
+                                            }
+                                            {!mySport && !myTeam &&
+                                                <Container
+                                                    maxWidth={"xl"}
                                                 >
-                                                    <Button
-                                                        variant={"contained"}
-                                                        color={"secondary"}
-                                                        scroll={false}
-                                                        component={Link}
-                                                        href={`https://00m.in/htguC`}
-                                                        target={"_blank"}
-                                                        sx={{
-                                                            width:"100%",
-                                                            border: `1px solid secondary.dark`,
-                                                        }}
-                                                    >
-                                                        <Stack
-                                                            direction={"row"}
-                                                            width={"100%"}
-                                                            justifyContent={"flex-start"}
-                                                            alignItems={"center"}
-                                                            spacing={2}
-                                                            py={1}
-                                                        >
-                                                            <Avatar
-                                                                sx={{height: "2em", width: "2em",
-                                                                    backgroundColor: "text.secondary",
-                                                                }}
-                                                            >
-                                                                <HiArrowTopRightOnSquare fontSize={"20px"}/>
-                                                            </Avatar>
-                                                            <Typography>
-                                                                最新版タイムスケジュール
-                                                            </Typography>
-                                                        </Stack>
-                                                    </Button>
-                                                    <Grid container spacing={1}>
-                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
-                                                            <Typography pl={2} pt={2}>
-                                                                あなたが参加する試合
-                                                            </Typography>
+                                                    <OtherInfo infoName={""}
+                                                               infoContent={"どの競技にも参加していません。"}
+                                                               infoSubContent={"競技に参加しない方でも、各競技の進行状況を見ることができます。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
+                                                </Container>
+                                            }
+                                        </CircleContainer>
 
-                                                            {mySport && myGame && myTeam &&　
-                                                                <>
-                                                                    <Schedule
-                                                                        sportId={mySport.id}
-                                                                        gameId={myGame.id}
-                                                                        matches={myTeamMatches}
-                                                                        myTeamId={myTeam.id}
-                                                                    />
-                                                                </>
-                                                            }
+                                        <Container
+                                            maxWidth={"xl"}
+                                            disableGutters
+                                            sx={{px: 1, py: 3, mt: "-100px"}}
+                                        >
+                                            <Stack
+                                                direction={"column"}
+                                                justifyContent={"space-between"}
+                                                spacing={3}
+                                            >
+                                                <Grid container spacing={1}>
+                                                    <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                        <Typography pl={2} pt={2}>
+                                                            あなたが参加する試合
+                                                        </Typography>
 
-                                                            {!mySport && !myGame && !myTeam &&
-                                                                <>
-                                                                    <OtherInfo infoContent={"あなたが参加する試合はありません"} />
-                                                                </>
-                                                            }
-                                                        </Grid>
-                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
-                                                            <Typography pl={2} pt={2}>
-                                                                あなたが審判する試合
-                                                            </Typography>
-                                                            {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
-                                                                <JudgeSchedule
+                                                        {mySport && myGame && myTeam &&
+                                                            <>
+                                                                <Schedule
                                                                     sportId={mySport.id}
                                                                     gameId={myGame.id}
-                                                                    matches={myJudgeMatches}
+                                                                    matches={myTeamMatches}
                                                                     myTeamId={myTeam.id}
                                                                 />
-                                                            }
-                                                            {!mySport && !myGame && !myTeam && myJudgeMatches.length === 0 &&
-                                                                <OtherInfo infoContent={"競技のルールに従ってください"} infoSubContent={"あなたのチームが審判として登録された試合はありませんが、ルールによってはあなたが審判である可能性があります。"}/>
-                                                            }
-                                                        </Grid>
-                                                        <Typography pl={2} pt={2}>
-                                                            すべての競技
-                                                        </Typography>
-                                                        {sports
-                                                            .sort((a, b) => b.weight - a.weight)
-                                                            .map((sport) => {
-                                                                return (
-                                                                    <Grid xs={12} sm={12} lg={12} key={sport.id}>
-                                                                        <SportsListElement
-                                                                            sport={sport}
-                                                                        />
-                                                                    </Grid>
-                                                                );
-                                                            })}
+                                                            </>
+                                                        }
+
+                                                        {!mySport && !myGame && !myTeam &&
+                                                            <>
+                                                                <OtherInfo
+                                                                    infoContent={"あなたが参加する試合はありません"}/>
+                                                            </>
+                                                        }
                                                     </Grid>
-                                                </Stack>
-                                            </Container>
+                                                    <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                        <Typography pl={2} pt={2}>
+                                                            あなたが審判する試合
+                                                        </Typography>
+                                                        {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
+                                                            <JudgeSchedule
+                                                                sportId={mySport.id}
+                                                                gameId={myGame.id}
+                                                                matches={myJudgeMatches}
+                                                                myTeamId={myTeam.id}
+                                                            />
+                                                        }
+                                                        {!mySport && !myGame && !myTeam && myJudgeMatches.length === 0 &&
+                                                            <OtherInfo infoContent={"競技のルールに従ってください"}
+                                                                       infoSubContent={"あなたのチームが審判として登録された試合はありませんが、ルールによってはあなたが審判である可能性があります。"}/>
+                                                        }
+                                                    </Grid>
+                                                    <Typography pl={2} pt={2}>
+                                                        すべての競技
+                                                    </Typography>
+                                                    {sports
+                                                        .sort((a, b) => b.weight - a.weight)
+                                                        .map((sport) => {
+                                                            return (
+                                                                <Grid xs={12} sm={12} lg={12} key={sport.id}>
+                                                                    <SportsListElement
+                                                                        sport={sport}
+                                                                    />
+                                                                </Grid>
+                                                            );
+                                                        })}
+                                                </Grid>
+                                            </Stack>
+                                        </Container>
                                     </Box>
-                            </UsersContext.Provider>
-                        </TeamsContext.Provider>
-                    </LocationsContext.Provider>
-                </ImagesContext.Provider>
-            )}
+                                </UsersContext.Provider>
+                            </TeamsContext.Provider>
+                        </LocationsContext.Provider>
+                    </ImagesContext.Provider>
+                )}
         </>
     )
 }
